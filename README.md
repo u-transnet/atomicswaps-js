@@ -1,1 +1,21 @@
-# atomicswaps-js
+[![English](https://thumb.ibb.co/jDrVkd/gb.png)](README.md) [![Russian](https://thumb.ibb.co/cjYMrJ/ru.png)](README.ru.md)
+
+# AtomicSwaps JS
+Modular implementation of client side for atomicswaps
+
+
+## Installation
+```
+git clone https://github.com/u-transnet/atomicswaps-js/
+npm install
+```
+
+## Related projects
+- [EthAtomiccSwap](https://github.com/u-transnet/ethatomicswap)
+
+## Contributing
+We'd love to have your helping hand on our project! See [CONTRIBUTING.md](CONTRIBUTING.md) for more information on what we're looking for and how to get started.
+
+## License
+Project is under the MIT license. See [LICENSE](LICENSE) for more information.
+
