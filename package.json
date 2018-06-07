@@ -1,0 +1,42 @@
+{
+  "name": "atomicswaps-js",
+  "version": "0.1.0",
+  "description": "Modular implementation of client side for atomicswaps",
+  "main": "index.js",
+  "scripts": {
+    "build": "./node_modules/.bin/webpack --require babel-register --config webpack.dev.js",
+    "build:prod": "./node_modules/.bin/webpack --require babel-register --config webpack.prod.js",
+    "watch": "./node_modules/.bin/webpack --watch --require babel-register",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/u-transnet/atomicswaps-js.git"
+  },
+  "keywords": [
+    "blockchain",
+    "atomicswap",
+    "bitcoin",
+    "ethereum"
+  ],
+  "author": "Ilya Shmelev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/u-transnet/atomicswaps-js/issues"
+  },
+  "homepage": "https://github.com/u-transnet/atomicswaps-js#readme",
+  "dependencies": {
+    "webpack3": "^4.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "clean-webpack-plugin": "^0.1.19",
+    "uglifyjs-webpack-plugin": "^1.2.5",
+    "webpack": "^4.11.1",
+    "webpack-command": "^0.2.0",
+    "webpack-merge": "^4.1.2"
+  }
+}
