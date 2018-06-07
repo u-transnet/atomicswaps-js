@@ -13,10 +13,11 @@ class NotImplementedError extends Error{
 
 class AtomicSwap{
 
-    constructor(privateKey){
+    constructor(initiatorAddress, privateKey){
         if(this.constructor === AtomicSwap)
             throw Error("You can't instantiate AtomicSwap class because it's abstract");
 
+        this.initiatorAddress = initiatorAddress;
         this.privateKey = privateKey;
     }
 
