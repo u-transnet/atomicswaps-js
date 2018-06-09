@@ -65,6 +65,88 @@ class EthAtomicSwap extends AtomicSwap {
         )
     }
 
+    _fetchSwapEvent(eventName, callback) {
+        this.engine.fetchEvent(eventName, {
+            filter: {
+                _hashedSecret: this.secretHash,
+                _from: this.from,
+                _to: this.to
+            },
+            fromBlock: 0,
+            toBlock: "latest"
+        }, (err, events) => {
+            if (err) {
+                callback(err, null);
+                return;
+            }
+
+            if (events.length === 0) {
+                callback(null, null);
+                return;
+            }
+
+            callback(null, events[0])
+        });
+    }
+
+    auditSwap(transactionHash, callback) {
+        this._fetchSwapEvent("Initiated", (err, event) => {
+            if (!event) {
+                callback(null, [], err);
+                return;
+            }
+
+            let data = event.returnValues;
+            let diffs = [];
+
+            if (data._refundTime !== this.refundTime.toString())
+                diffs.push({
+                    'name': 'refundTime',
+                    'value': data._refundTime,
+                    'localValue': this.refundTime
+                });
+
+            let value = this.engine.calculateAmount(this.amount, this.asset);
+            if (data._value !== value)
+                diffs.push({
+                    'name': 'value',
+                    'value': data._value,
+                    'localValue': value
+                });
+
+            this._fetchSwapEvent("Redeemed", (err, event) => {
+                if (err) {
+                    callback(null, [], err);
+                    return;
+                }
+
+                if (event) {
+                    callback({
+                        secret: event.returnValues._secret,
+                        refunded: false
+                    }, diffs, null)
+                } else
+                    this._fetchSwapEvent("Refunded", (err, event) => {
+                        if (err) {
+                            callback(null, [], err);
+                            return;
+                        }
+
+                        if (event)
+                            callback({
+                                secret: null,
+                                refunded: true
+                            }, diffs, null);
+                        else
+                            callback({
+                                secret: null,
+                                refunded: false,
+                            }, diffs, null);
+                    })
+            });
+        });
+    }
+
 }
 
 export default EthAtomicSwap;

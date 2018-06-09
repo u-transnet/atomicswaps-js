@@ -11,9 +11,13 @@ class Engine {
         this.web3 = new Web3(new Web3.providers.WebsocketProvider(host));
         this.web3.defaultAccount = account;
 
-        this.contract = new this.web3.eth.Contract(AbiConfig);
+        this.contract = new this.web3.eth.Contract(AbiConfig, Engine.CONTRACT_ADDRESS_MAP[networkType]);
         this.privateKey = privateKey;
         this.networkType = networkType;
+    }
+
+    calculateAmount(amount, asset) {
+        return this.web3.utils.toWei(amount.toString(), asset);
     }
 
     execute(name, amount, asset, gas, callback, ...params) {
@@ -26,7 +30,7 @@ class Engine {
         };
 
         if (amount)
-            tx.value = this.web3.utils.toWei(amount.toString(), asset);
+            tx.value = this.calculateAmount(amount, asset);
 
         this.web3.eth.accounts.signTransaction(tx, this.privateKey).then(signed => {
             let tran = this.web3.eth.sendSignedTransaction(signed.rawTransaction);
@@ -43,6 +47,10 @@ class Engine {
                 callback(null, error);
             });
         });
+    }
+
+    fetchEvent(eventName, options, callback) {
+        this.contract.getPastEvents(eventName, options, callback);
     }
 
 }
