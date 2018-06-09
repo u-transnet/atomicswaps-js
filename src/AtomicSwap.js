@@ -14,8 +14,10 @@ class NotImplementedError extends Error{
 class AtomicSwap{
 
     /**
-     *
+     * @param {string} account - initiator of action
      * @param {string} privateKey - privateKey for signing transactions
+     * @param {string} host - url of host node
+     * @param {string} networkType - type of the network
      * @param {string} secretHash - hash of secret string (ripemd160(hash256(secret)))
      * @param {string} from - owner of funds
      * @param {string} to - address of the participant
@@ -23,11 +25,16 @@ class AtomicSwap{
      * @param {float} amount - amount of tokens to transfer
      * @param {string=} asset - tokens to transfer
      */
-    constructor(privateKey, from, to, secretHash, refundTime,  amount, asset){
+    constructor(account, privateKey, host, networkType,
+                from, to, secretHash, refundTime, amount, asset) {
         if(this.constructor === AtomicSwap)
             throw Error("You can't instantiate AtomicSwap class because it's abstract");
 
+        this.account = account;
         this.privateKey = privateKey;
+        this.host = host;
+        this.networkType = networkType;
+
         this.from = from;
         this.to = to;
         this.amount = amount;
@@ -38,39 +45,44 @@ class AtomicSwap{
 
     /**
      * Initiate atomic swap
+     * @param callback - function that called with (transactionData, error) params
      */
-    initiate(){
+    initiate(callback) {
         throw NotImplementedError();
     }
 
 
     /**
      * Participate to atomic swap
+     * @param callback - function that called with (transactionData, error) params
      */
-    participate(){
+    participate(callback) {
         throw NotImplementedError();
     }
 
     /**
      * Redeem funds with given secret
      * @param {string} secret - secret string used for swap initiating
+     * @param callback - function that called with (transactionData, error) params
      */
-    redeem(secret){
+    redeem(secret, callback) {
         throw NotImplementedError();
     }
 
     /**
      * Refund funds of swap to transactions' initiator
+     * @param callback - function that called with (transactionData, error) params
      */
-    refund(){
+    refund(callback) {
         throw NotImplementedError();
     }
 
     /**
      * Fetch swap based on transaction hash or parameters of swap
      * @param {string=} transactionHash - transaction hash of the operation on swap
+     * @param callback - function that called with (transactionData, error) params
      */
-    fetchSwap(transactionHash){
+    auditSwap(transactionHash, callback) {
         throw NotImplementedError();
     }
 
