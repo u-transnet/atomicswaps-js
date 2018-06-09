@@ -63,6 +63,21 @@
         "indexed": false,
         "name": "_refundTime",
         "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "name": "_hashedSecret",
+        "type": "bytes20"
+      },
+      {
+        "indexed": true,
+        "name": "_from",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "name": "_to",
+        "type": "address"
       }
     ],
     "name": "Refunded",
@@ -75,6 +90,26 @@
         "indexed": false,
         "name": "_redeemTime",
         "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_secret",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "name": "_hashedSecret",
+        "type": "bytes20"
+      },
+      {
+        "indexed": true,
+        "name": "_from",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "name": "_to",
+        "type": "address"
       }
     ],
     "name": "Redeemed",
@@ -94,17 +129,17 @@
         "type": "uint256"
       },
       {
-        "indexed": false,
+        "indexed": true,
         "name": "_hashedSecret",
         "type": "bytes20"
       },
       {
-        "indexed": false,
+        "indexed": true,
         "name": "_from",
         "type": "address"
       },
       {
-        "indexed": false,
+        "indexed": true,
         "name": "_to",
         "type": "address"
       },
@@ -131,17 +166,17 @@
         "type": "uint256"
       },
       {
-        "indexed": false,
+        "indexed": true,
         "name": "_hashedSecret",
         "type": "bytes20"
       },
       {
-        "indexed": false,
+        "indexed": true,
         "name": "_from",
         "type": "address"
       },
       {
-        "indexed": false,
+        "indexed": true,
         "name": "_to",
         "type": "address"
       },
