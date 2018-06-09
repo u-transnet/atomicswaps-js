@@ -80,7 +80,7 @@ class AtomicSwap{
     /**
      * Fetch swap based on transaction hash or parameters of swap
      * @param {string=} transactionHash - transaction hash of the operation on swap
-     * @param callback - function that called with (transactionData, error) params
+     * @param callback - function that called with (state: {secret: string, refunded: bool}, diffs: [], error) params
      */
     auditSwap(transactionHash, callback) {
         throw NotImplementedError();
